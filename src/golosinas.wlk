@@ -99,14 +99,15 @@ object baniada {
 object pastillaTuttiFrutti {
 	var property libreDeGluten = false
 	const sabores = [frutilla, chocolate, naranja]
-	var indiceSabor = 0
+	var cantidadMordidas = 0
 	
 	method precio() = if(libreDeGluten) 7 else 10
-	method sabor() = sabores.get(indiceSabor)
+	method sabor() = sabores.get((cantidadMordidas) % 3)
 	method peso() = 5
 	
 	method recibirMordisco() {
-		indiceSabor =  (indiceSabor + 1) % sabores.size()
+		cantidadMordidas ++
+//		cantidadMordidas =  (cantidadMordidas + 1) % 3
 	}
 }
 

@@ -1,6 +1,271 @@
+import golosinas.*
+import sabores.*
+describe "Tests de golosina: bombon " {
+	const golosina = bombon
+	const peso = 15
+	const precio = 5
 
-test "testX" {
+	test "Tiene un peso inicial de 15 gramos" {		
+		assert.equals(peso, golosina.peso())
+	}
+	
+	test "Tiene un valor inicial de $5" {		
+		assert.equals(precio, golosina.precio())
+	}
+	
+	test "Es Libre de Gluten" {
+		assert.that(golosina.libreDeGluten())
+	}
+	
+	test "Cuando recibe un mordisco, pierde un 20 % de su peso + 1 gramo extra" {
+		golosina.recibirMordisco()
+		assert.equals(11, golosina.peso())
+	}
 
-	assert.that(true)
+	test "Nunca puede pesar menos que 0 gramos" {
+		golosina.recibirMordisco()
+		golosina.recibirMordisco()
+		golosina.recibirMordisco()
+		golosina.recibirMordisco()
+		golosina.recibirMordisco()
+		golosina.recibirMordisco()
+		golosina.recibirMordisco()
+		assert.equals(0, golosina.peso())
+	}
+}
+
+describe "Tests de golosina: alfajor " {
+	const golosina = alfajor
+	const peso = 300
+	const precio = 12
+
+	test "Tiene un peso inicial de 300 gramos" {		
+		assert.equals(peso, golosina.peso())
+	}
+	
+	test "Tiene un valor inicial de $12" {		
+		assert.equals(precio, golosina.precio())
+	}
+	
+	test "No Es Libre de Gluten" {
+		assert.notThat(golosina.libreDeGluten())
+	}
+	
+	test "Cuando recibe un mordisco, pierde un 20 % de su peso" {
+		golosina.recibirMordisco()
+		assert.equals(240, golosina.peso())
+	}
+}
+
+describe "Tests de golosina: carmelo " {
+	const golosina = caramelo
+	const peso = 5
+	const precio = 1
+
+	test "Tiene un peso inicial de 5 gramos" {		
+		assert.equals(peso, golosina.peso())
+	}
+	
+	test "Tiene un valor inicial de $1" {		
+		assert.equals(precio, golosina.precio())
+	}
+	
+	test "Es Libre de Gluten" {
+		assert.that(golosina.libreDeGluten())
+	}
+	
+	test "Cuando recibe un mordisco, pierde un gramo" {
+		golosina.recibirMordisco()
+		assert.equals(4, golosina.peso())
+	}
+}
+
+describe "Tests de golosina: chupetin " {
+	const golosina = chupetin
+	const peso = 7
+	const precio = 2
+
+	test "Tiene un peso inicial correcto" {		
+		assert.equals(peso, golosina.peso())
+	}
+	
+	test "Tiene un precio inicial correcto" {		
+		assert.equals(precio, golosina.precio())
+	}
+	
+	test "Es Libre de Gluten" {
+		assert.that(golosina.libreDeGluten())
+	}
+	
+	test "Cuando recibe un mordisco, pierde un 10 % de su peso" {
+		golosina.recibirMordisco()
+		assert.equals(6.3, golosina.peso())
+	}
+
+	test "Nunca puede pesar menos que 2 gramos" {
+		golosina.recibirMordisco()
+		golosina.recibirMordisco()
+		golosina.recibirMordisco()
+		golosina.recibirMordisco()
+		golosina.recibirMordisco()
+		golosina.recibirMordisco()
+		golosina.recibirMordisco()
+		golosina.recibirMordisco()
+		golosina.recibirMordisco()
+		golosina.recibirMordisco()
+		golosina.recibirMordisco()
+		golosina.recibirMordisco()
+		golosina.recibirMordisco()
+		golosina.recibirMordisco()
+		assert.equals(2, golosina.peso())
+	}
+}
+
+describe "Tests de golosina: oblea " {
+	const golosina = oblea
+	const peso = 250
+	const precio = 5
+	const sabor = vainilla
+
+	test "Tiene un peso inicial de 250 gramos" {		
+		assert.equals(peso, golosina.peso())
+	}
+	
+	test "Tiene un precio inicial de $5" {		
+		assert.equals(precio, golosina.precio())
+	}
+
+	test "Es sabor a Vainilla" {		
+		assert.equals(sabor, golosina.sabor())
+	}
+
+	
+	test "NO Es Libre de Gluten" {
+		assert.notThat(golosina.libreDeGluten())
+	}
+	
+	test "Cuando recibe un mordisco, si su peso actual > 70, pierde el 50% de su peso" {
+		
+		const pesoActual = golosina.peso()
+		golosina.recibirMordisco()
+		assert.equals(pesoActual * 0.5, golosina.peso())
+	}
+	
+	test "Cuando recibe un mordisco, si su peso actual <= 70, pierde el 25% de su peso" {
+		// le doy dos mordiscos para que su peso quede por debajo de 70
+		golosina.recibirMordisco()
+		golosina.recibirMordisco()
+		
+		const pesoActual = golosina.peso()
+		golosina.recibirMordisco()
+		assert.equals(pesoActual * 0.75, golosina.peso())
+	}
+	
 
 }
+
+describe "Tests de golosina: chocolatin " {
+	const golosina = chocolatin
+	const peso = 100
+	const sabor = chocolate
+
+	test "Tiene un peso inicial de 100 gramos" {		
+		assert.equals(peso, golosina.peso())
+	}
+	
+	test "Tiene un precio inicial de 0.50 por gramo" {		
+		assert.equals(golosina.peso() * 0.50, golosina.precio())
+	}
+
+	test "Es sabor a Chocolate" {		
+		assert.equals(sabor, golosina.sabor())
+	}
+
+	
+	test "NO Es Libre de Gluten" {
+		assert.notThat(golosina.libreDeGluten())
+	}
+	
+	test "Cuando recibe un mordisco, pierde 2 gramos" {
+		
+		const pesoActual = golosina.peso()
+		golosina.recibirMordisco()
+		assert.equals(pesoActual - 2, golosina.peso())
+	}
+
+}
+describe "Tests de golosina: bañada " {
+	const base = bombon
+	const golosina = baniada
+
+	test "Tiene un peso inicial igual a la base + 4 gramos" {
+		golosina.base(base)	
+		assert.equals(golosina.base().peso()+4, golosina.peso())
+	}
+	
+	test "Tiene un precio inicial igual a la base + 2 pesos" {		
+		golosina.base(base)	
+		assert.equals(golosina.base().precio()+2, golosina.precio())
+	}
+
+	test "Es sabor es el mismo que la golosina base" {		
+		golosina.base(base)	
+		assert.equals(golosina.base().sabor(), golosina.sabor())
+	}
+
+	
+	test "Es Libre de Gluten si su base lo es" {
+		golosina.base(base)	
+		assert.equals(golosina.base().libreDeGluten(), golosina.libreDeGluten())
+	}
+	
+	test "Cuando recibe un mordisco, lo mismo que su base + 2 gramos de cobertura" {
+		
+		golosina.base(base)	
+		golosina.recibirMordisco()
+		assert.equals(golosina.base().peso()+2, golosina.peso())
+	}
+
+	test "Cuando recibe dos mordiscos, se queda sin cobertura" {
+		
+		golosina.base(base)	
+		golosina.recibirMordisco()
+		golosina.recibirMordisco()
+		assert.equals(golosina.base().peso(), golosina.peso())
+	}
+}
+
+describe "Tests de golosina: pastilla tutti frutti " {
+	const golosina = pastillaTuttiFrutti
+	const peso = 5
+
+	test "Tiene un peso inicial de 5 gramos" {		
+		assert.equals(peso, golosina.peso())
+	}
+	
+	test "Si es libre de gluten tiene un precio inicial de $7" {
+		golosina.libreDeGluten(true)
+		assert.equals(7, golosina.precio())
+	}
+
+	test "Si NO es libre de gluten tiene un precio inicial de $10" {
+		golosina.libreDeGluten(false)
+		assert.equals(10, golosina.precio())
+	}
+
+	test "Cuando recibe un mordisco, cambia de sabor" {
+	
+		assert.equals(frutilla, golosina.sabor())
+		golosina.recibirMordisco()
+		assert.equals(chocolate, golosina.sabor())
+		golosina.recibirMordisco()
+		assert.equals(naranja, golosina.sabor())
+		golosina.recibirMordisco()
+		assert.equals(frutilla, golosina.sabor())
+	}
+
+}
+
+
+
+
