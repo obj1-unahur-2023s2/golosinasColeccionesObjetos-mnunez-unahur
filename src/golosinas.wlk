@@ -69,9 +69,9 @@ object oblea {
 
 object chocolatin {
 	var peso = 100
-	const pesoInicial = peso
+	const precio = peso * 0.5
 	
-	method precio() = pesoInicial * 0.5
+	method precio() = precio
 	method sabor() = chocolate
 	method peso() = peso
 	method libreDeGluten() = false
@@ -107,7 +107,6 @@ object pastillaTuttiFrutti {
 	
 	method recibirMordisco() {
 		cantidadMordidas ++
-//		cantidadMordidas =  (cantidadMordidas + 1) % 3
 	}
 }
 
